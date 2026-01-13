@@ -1,8 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import Calculator from "./components/Calculator";
 import PricingTable from "./components/PricingTable";
+import TechnicianWaitlistModal from "./components/TechnicianWaitlistModal";
 import { CheckCircle2, ShieldCheck, AlertCircle, Wrench, Zap, Ruler, MapPin, Search } from "lucide-react";
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 font-sans selection:bg-blue-100">
       {/* 1. HERO */}
@@ -97,7 +103,10 @@ export default function Home() {
       <section className="py-24 bg-blue-900 text-white text-center px-4">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold mb-8">Need a reliable technician?</h2>
-          <button className="bg-white text-blue-900 font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-gray-50 transition-transform hover:scale-105 active:scale-95 disabled:opacity-75 disabled:cursor-not-allowed">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-white text-blue-900 font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-gray-50 transition-transform hover:scale-105 active:scale-95 disabled:opacity-75 disabled:cursor-not-allowed"
+          >
             Connect with a recommended technician
           </button>
           <p className="mt-6 text-blue-200 text-sm font-medium">
@@ -132,6 +141,12 @@ export default function Home() {
           </p>
         </div>
       </footer>
+
+      {/* MODAL */}
+      <TechnicianWaitlistModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }
