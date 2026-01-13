@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { X, Send, CheckCircle2, MessageSquare } from "lucide-react";
+import { X, MessageSquare, CheckCircle2 } from "lucide-react";
 
 interface ReferralModalProps {
     isOpen: boolean;
@@ -49,10 +49,29 @@ export default function ReferralModal({ isOpen, onClose, serviceName }: Referral
                                 <MessageSquare className="w-6 h-6" />
                             </div>
                             <h3 className="text-2xl font-bold text-slate-900 mb-2">Connect with a Pro</h3>
-                            <p className="text-slate-600 leading-relaxed">
-                                We’re currently onboarding technicians in Klang Valley.
-                                Leave your WhatsApp and we’ll notify you when we have a recommended provider for <strong>{serviceName.toLowerCase()}</strong>.
+                            <p className="text-slate-600 leading-relaxed mb-6">
+                                We&apos;re currently vetting the best local technicians in Klang Valley. 
+                                Leave your contact and we&apos;ll notify you when we have a verified match.
                             </p>
+                            
+                            <a 
+                                href={`https://wa.me/60176710965?text=${encodeURIComponent(`Hi! I'm interested in ${serviceName.toLowerCase()} servicing. Can you recommend a technician?`)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full bg-[#25D366] hover:bg-[#22c35e] text-white font-black text-lg py-4 rounded-xl shadow-lg shadow-green-200 transition-all active:scale-[0.98] flex items-center justify-center gap-3 mb-8"
+                            >
+                                <MessageSquare className="w-6 h-6" />
+                                Chat on WhatsApp Now
+                            </a>
+
+                            <div className="relative mb-6">
+                                <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                                    <div className="w-full border-t border-gray-100"></div>
+                                </div>
+                                <div className="relative flex justify-center text-xs uppercase tracking-widest font-bold text-gray-400">
+                                    <span className="bg-white px-2">Or leave your number</span>
+                                </div>
+                            </div>
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-4">
