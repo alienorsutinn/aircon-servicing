@@ -31,9 +31,9 @@ export default function Home() {
       </section>
 
       {/* 2. SERVICES GRID */}
-      <section className="py-24 px-4 bg-slate-50/50">
+      <section className="py-16 md:py-24 px-4 bg-slate-50/50">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-baseline justify-between mb-12 gap-4 border-b border-slate-200 pb-8">
+          <div className="flex flex-col md:flex-row items-baseline justify-between mb-8 md:mb-12 gap-4 border-b border-slate-200 pb-8">
             <div>
               <h2 className="text-3xl font-black text-slate-900 tracking-tight">Service Cost Checkers</h2>
               <p className="text-slate-500 mt-2">Select a service to view typical Klang Valley market rates.</p>
@@ -49,9 +49,9 @@ export default function Home() {
       </section>
 
       {/* 3. HOW IT WORKS */}
-      <section className="py-24 px-4 border-y border-slate-100">
+      <section className="py-16 md:py-24 px-4 border-y border-slate-100">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-black text-slate-900 tracking-tight text-center mb-16">How It Works</h2>
+          <h2 className="text-3xl font-black text-slate-900 tracking-tight text-center mb-12 md:mb-16">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-12">
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600">
@@ -88,10 +88,10 @@ export default function Home() {
       <GlobalDisclaimer />
 
       {/* 5. HOMEOWNER CTA */}
-      <section className="py-24 px-4 bg-primary/5">
+      <section className="py-16 md:py-24 px-4 bg-primary/5">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">Need a professional right now?</h2>
-          <p className="text-xl text-slate-600 font-medium">
+          <p className="text-lg md:text-xl text-slate-600 font-medium px-4">
             We&apos;re currently vetting the best local technicians in Klang Valley to ensure you get fair prices and quality work.
           </p>
           <button

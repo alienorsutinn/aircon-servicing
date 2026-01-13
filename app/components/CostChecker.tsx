@@ -43,7 +43,7 @@ export default function CostChecker({ category }: CostCheckerProps) {
     }, [category, serviceId, units, unitType, capacity]);
 
     return (
-        <div className="glass rounded-[2rem] shadow-premium p-8 md:p-10 border border-white/50 max-w-lg mx-auto transition-all duration-500 hover:shadow-2xl">
+        <div className="glass rounded-[2rem] shadow-premium p-6 md:p-10 border border-white/50 max-w-lg mx-auto transition-all duration-500 hover:shadow-2xl">
             <div className="flex items-center gap-4 mb-8 text-slate-900 border-b border-slate-100 pb-6">
                 <div className={`p-4 rounded-2xl bg-${category.color}-500/10`}>
                     <CalculatorIcon className={`w-7 h-7 text-${category.color}-600`} />
@@ -146,8 +146,8 @@ export default function CostChecker({ category }: CostCheckerProps) {
                         {/* Decorative background element */}
                         <div className={`absolute -right-8 -top-8 w-32 h-32 bg-${category.color}-500/20 rounded-full blur-3xl`}></div>
 
-                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-2 relative z-10 text-center">Typical cost in Klang Valley</p>
-                        <div className="text-4xl sm:text-5xl font-black tracking-tighter relative z-10 text-center mb-6">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-2 relative z-10 text-center">Typical cost in Klang Valley</p>
+                        <div className="text-3xl sm:text-5xl font-black tracking-tighter relative z-10 text-center mb-6">
                             RM <span className="text-white">{calculation.min}</span> <span className="text-slate-500 font-light mx-1">–</span> <span className="text-white">{calculation.max}</span>
                         </div>
 

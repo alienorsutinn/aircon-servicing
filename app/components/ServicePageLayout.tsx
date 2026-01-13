@@ -37,15 +37,15 @@ export default function ServicePageLayout({ category }: ServicePageLayoutProps) 
             </nav>
 
             {/* HERO SECTION */}
-            <section className="relative pt-40 pb-20 overflow-hidden bg-white">
+            <section className="relative pt-32 md:pt-40 pb-16 md:pb-20 overflow-hidden bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
-                        <div className="lg:col-span-7 space-y-8">
-                            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-black uppercase tracking-[0.2em] bg-${category.color}-500/5 border-${category.color}-500/10 text-${category.color}-600`}>
+                        <div className="lg:col-span-7 space-y-6 md:space-y-8">
+                            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-black uppercase tracking-[0.2em] bg-${category.color}-500/5 border-${category.color}-500/10 text-${category.color}-600`}>
                                 <MapPin className="w-4 h-4" /> Klang Valley • 2026 Guide
                             </div>
 
-                            <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] text-slate-900">
+                            <h1 className="text-4xl md:text-7xl font-black tracking-tighter leading-[0.9] text-slate-900">
                                 How much for <br />
                                 <span className={`text-${category.color}-600`}>{category.title.toLowerCase()}?</span>
                             </h1>
@@ -174,17 +174,17 @@ export default function ServicePageLayout({ category }: ServicePageLayoutProps) 
             </section>
 
             {/* FINAL CTA */}
-            <section className="py-24 px-4">
-                <div className="max-w-5xl mx-auto bg-primary rounded-[3rem] p-12 md:p-20 text-center text-white relative overflow-hidden shadow-2xl">
-                    <h2 className="text-3xl md:text-6xl font-black mb-8 tracking-tighter relative z-10">
+            <section className="py-16 md:py-24 px-4">
+                <div className="max-w-5xl mx-auto bg-primary rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-20 text-center text-white relative overflow-hidden shadow-2xl">
+                    <h2 className="text-2xl md:text-6xl font-black mb-6 md:mb-8 tracking-tighter relative z-10">
                         {category.cta?.title || "Need a reliable pro?"}
                     </h2>
-                    <p className="text-xl text-blue-100 mb-12 max-w-2xl mx-auto font-medium relative z-10">
+                    <p className="text-lg md:text-xl text-blue-100 mb-8 md:mb-12 max-w-2xl mx-auto font-medium relative z-10 px-4">
                         {category.cta?.subtext || `We're vetting top technicians in the area. Join our early access list for ${category.title.toLowerCase()}.`}
                     </p>
                     <button
                         onClick={() => setIsReferralModalOpen(true)}
-                        className="bg-white text-primary font-black text-xl px-12 py-6 rounded-2xl shadow-xl hover:bg-slate-50 transition-all hover:scale-105 active:scale-95 relative z-10"
+                        className="w-full md:w-auto bg-white text-primary font-black text-lg md:text-xl px-8 md:px-12 py-5 md:py-6 rounded-2xl shadow-xl hover:bg-slate-50 transition-all hover:scale-105 active:scale-95 relative z-10"
                     >
                         Connect with a recommended technician
                     </button>
