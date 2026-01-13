@@ -1,4 +1,5 @@
 import Calculator from "./components/Calculator";
+import PricingTable from "./components/PricingTable";
 import { CheckCircle2, ShieldCheck, MapPin, AlertCircle } from "lucide-react";
 
 export default function Home() {
@@ -66,17 +67,29 @@ export default function Home() {
       {/* Trust & Info Section */}
       <section className="py-20 bg-white border-t border-gray-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl font-black text-slate-900 mb-4">Typical Aircon Service Rates</h2>
+            <p className="text-lg text-slate-600">
+              We aggregated 2025/2026 pricing from 50+ service providers in Klang Valley.
+              These are estimates for standard residential units.
+            </p>
+          </div>
+
+          <div className="mb-16">
+            <PricingTable />
+          </div>
+
           <div className="grid md:grid-cols-2 gap-16">
             <div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-6">Why is pricing so confusing?</h3>
+              <h3 className="text-2xl font-bold text-slate-900 mb-6">Why prices vary</h3>
               <p className="text-slate-600 mb-6 leading-relaxed">
-                Many technicians quote vague "starting at" prices, then add hidden fees for gas refill or transport. We aggregated data from over 50 service providers in KL, PJ, Subang, and Shah Alam to give you a realistic baseline.
+                Technicians often quote a base price, but the final cost depends on the condition of your unit and logistics.
               </p>
               <ul className="space-y-4">
                 {[
-                  "Gas Top-up R22/R410A often costs extra (+RM30-80)",
-                  "Dismantling for Overhaul is labor intensive",
-                  "Older units may require more care"
+                  "Gas Type: R22 (older) is becoming rarer and more expensive than R32/R410A.",
+                  "Accessibility: High ceilings (>10ft) may require scaffolding (+RM50-100).",
+                  "Location: Technician transport fees apply if outside their coverage area."
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-slate-700">
                     <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />

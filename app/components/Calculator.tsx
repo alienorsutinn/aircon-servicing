@@ -3,26 +3,11 @@
 import { useState } from "react";
 import { Calculator as CalculatorIcon, Info, RefreshCw, ThermometerSun } from "lucide-react";
 
+import { CALCULATOR_RATES } from "../data/services";
+
 type UnitType = "wall" | "ceiling";
 type Horsepower = "1.0" | "1.5" | "2.0" | "2.5" | "3.0";
 type ServiceType = "normal" | "chemical" | "overhaul";
-
-const PRICING_DATA = {
-    wall: {
-        "1.0": { normal: [80, 100], chemical: [150, 180], overhaul: [250, 300] },
-        "1.5": { normal: [90, 120], chemical: [180, 220], overhaul: [280, 330] },
-        "2.0": { normal: [110, 140], chemical: [220, 250], overhaul: [350, 400] },
-        "2.5": { normal: [130, 160], chemical: [250, 300], overhaul: [400, 450] },
-        "3.0": { normal: [150, 180], chemical: [280, 350], overhaul: [450, 500] },
-    },
-    ceiling: {
-        "1.0": { normal: [120, 150], chemical: [220, 260], overhaul: [350, 400] },
-        "1.5": { normal: [130, 160], chemical: [240, 280], overhaul: [380, 430] },
-        "2.0": { normal: [150, 180], chemical: [280, 320], overhaul: [450, 500] },
-        "2.5": { normal: [180, 210], chemical: [320, 360], overhaul: [500, 550] },
-        "3.0": { normal: [200, 240], chemical: [350, 400], overhaul: [550, 600] },
-    },
-};
 
 export default function Calculator() {
     const [unitType, setUnitType] = useState<UnitType>("wall");
@@ -30,7 +15,7 @@ export default function Calculator() {
     const [serviceType, setServiceType] = useState<ServiceType>("normal");
 
 
-    const priceRange = PRICING_DATA[unitType][hp][serviceType];
+    const priceRange = CALCULATOR_RATES[unitType][hp][serviceType];
 
     return (
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100 max-w-md mx-auto transform transition-all hover:scale-[1.01] duration-300">
