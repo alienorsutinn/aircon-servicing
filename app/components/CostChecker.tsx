@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Calculator as CalculatorIcon, Info, ChevronDown } from "lucide-react";
+import { Calculator as CalculatorIcon, Info, ChevronDown, Sparkles, User } from "lucide-react";
+import AIDiagnostic from "./AIDiagnostic";
 import { ServiceCategory } from "../types";
 
 interface CostCheckerProps {
@@ -11,6 +12,8 @@ interface CostCheckerProps {
 export default function CostChecker({ category }: CostCheckerProps) {
     const [serviceId, setServiceId] = useState<string>(category.items[0].id);
     const [units, setUnits] = useState<number>(1);
+    const [mode, setMode] = useState<"manual" | "ai">("manual");
+    const [aiResult, setAiResult] = useState<{ min: number, max: number, reasoning: string } | null>(null);
 
     // Dynamically handle different types and capacities based on the service
     const unitTypeOptions = category.calculatorRates ? Object.keys(category.calculatorRates) : [];
@@ -54,10 +57,28 @@ export default function CostChecker({ category }: CostCheckerProps) {
                 </div>
             </div>
 
-            <div className="space-y-8">
-                {/* Sub-service Selector */}
-                <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">Service Type</label>
+            <div className="flex bg-slate-100 p-1.5 rounded-2xl mb-8">
+                <button
+                    onClick={() => { setMode("manual"); setAiResult(null); }}
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold transition-all ${mode === "manual" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
+                >
+                    <User className="w-4 h-4" />
+                    Manual
+                </button>
+                <button
+                    onClick={() => setMode("ai")}
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold transition-all ${mode === "ai" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
+                >
+                    <Sparkles className="w-4 h-4" />
+                    AI Diagnostic
+                </button>
+            </div>
+
+            {mode === "manual" ? (
+                <div className="space-y-8 animate-in fade-in duration-500">
+                    {/* Sub-service Selector */}
+                    <div>
+                        <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">Service Type</label>
                     <div className="group relative">
                         <select
                             value={serviceId}
@@ -139,27 +160,43 @@ export default function CostChecker({ category }: CostCheckerProps) {
                         </div>
                     </div>
                 )}
+            </div>
+            ) : (
+                <AIDiagnostic
+                    onDiagnosticComplete={(id, min, max, reasoning) => {
+                        setServiceId(id);
+                        setAiResult({ min, max, reasoning });
+                    }}
+                />
+            )}
 
-                {/* Result Area */}
-                <div className="mt-10 pt-10 border-t border-slate-100/50">
+            {/* Result Area */}
+            {(mode === "manual" || (mode === "ai" && aiResult)) && (
+                <div className="mt-10 pt-10 border-t border-slate-100/50 animate-in slide-in-from-bottom-4 duration-700">
+                    {aiResult && (
+                        <div className="mb-6 p-5 rounded-2xl bg-primary/5 border border-primary/10 text-primary text-sm font-medium leading-relaxed">
+                            <h4 className="font-black uppercase tracking-widest text-[10px] mb-2 opacity-70">AI Reasoning:</h4>
+                            {aiResult.reasoning}
+                        </div>
+                    )}
                     <div className="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
                         {/* Decorative background element */}
                         <div className={`absolute -right-8 -top-8 w-32 h-32 bg-${category.color}-500/20 rounded-full blur-3xl`}></div>
 
-                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-2 relative z-10 text-center">Typical cost in Klang Valley</p>
+                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-2 relative z-10 text-center">Typical cost in Klang Valley</p>
                         <div className="text-3xl sm:text-5xl font-black tracking-tighter relative z-10 text-center mb-6">
-                            RM <span className="text-white">{calculation.min}</span> <span className="text-slate-500 font-light mx-1">–</span> <span className="text-white">{calculation.max}</span>
+                            RM <span className="text-white">{aiResult ? aiResult.min : calculation.min}</span> <span className="text-slate-500 font-light mx-1">–</span> <span className="text-white">{aiResult ? aiResult.max : calculation.max}</span>
                         </div>
 
                         <div className="mt-6 flex items-start gap-2 text-[10px] text-slate-400 leading-tight relative z-10 p-4 rounded-xl bg-white/5 border border-white/10">
-                            <Info className="w-4 h-4 flex-shrink-0 mt-0.5 text-slate-300" />
+                            <Info className="w-4 h-4 shrink-0 mt-0.5 text-slate-300" />
                             <p>
-                                Estimates for {units} {unitType || 'selected'} items. Prices vary by technician and accessibility. Always ask for a fixed quote before work begins.
+                                Estimates for {mode === 'manual' ? `${units} ${unitType || 'selected'}` : '1 diagnostic'} item. Prices vary by technician and accessibility. Always ask for a fixed quote before work begins.
                             </p>
                         </div>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }
