@@ -9,7 +9,7 @@ export const SERVICES: ServiceCategory[] = [
         icon: "Wind",
         color: "blue",
         heroImage: "/technician-hero.png",
-        thumbnailImage: "/Users/alienorsutin/.gemini/antigravity/brain/9157b003-be08-4888-923a-a7ae828bfd89/aircon_card_thumb_1768291921479.png",
+        thumbnailImage: "/images/thumbnails/aircon.png",
         items: [
             {
                 id: "normal",
@@ -94,7 +94,7 @@ export const SERVICES: ServiceCategory[] = [
         icon: "Droplets",
         color: "emerald",
         heroImage: "/plumbing-hero.png",
-        thumbnailImage: "/Users/alienorsutin/.gemini/antigravity/brain/9157b003-be08-4888-923a-a7ae828bfd89/plumbing_card_thumb_1768291944784.png",
+        thumbnailImage: "/images/thumbnails/plumbing.png",
         items: [
             {
                 id: "leak",
@@ -174,7 +174,7 @@ export const SERVICES: ServiceCategory[] = [
         icon: "Zap",
         color: "amber",
         heroImage: "/electrical-hero.png",
-        thumbnailImage: "/Users/alienorsutin/.gemini/antigravity/brain/9157b003-be08-4888-923a-a7ae828bfd89/electrical_card_thumb_1768291967295.png",
+        thumbnailImage: "/images/thumbnails/electrical.png",
         items: [
             {
                 id: "powertrip",

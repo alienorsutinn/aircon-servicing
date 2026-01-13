@@ -5,15 +5,8 @@ import ServiceCard from "./components/ServiceCard";
 import TechnicianWaitlistModal from "./components/TechnicianWaitlistModal";
 import ReferralModal from "./components/ReferralModal";
 import GlobalDisclaimer from "./components/GlobalDisclaimer";
-import { ArrowRight, Wind, Droplets, Zap, LucideIcon } from "lucide-react";
+import { ShieldCheck, Search, Activity } from "lucide-react";
 import { SERVICES } from "./data/services";
-import { ServiceCategory } from "../types";
-
-const icons: { [key: string]: LucideIcon } = {
-    Wind,
-    Droplets,
-    Zap,
-};
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,6 +16,7 @@ export default function Home() {
     <div className="min-h-screen bg-white text-slate-800 selection:bg-primary/10">
       {/* 1. HERO SECTION */}
       <section className="pt-32 pb-24 px-4 border-b border-slate-100">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-[10px] font-black uppercase tracking-widest shadow-sm">
             <ShieldCheck className="w-4 h-4" /> 100% Independent Market Data
           </div>
@@ -41,6 +35,7 @@ export default function Home() {
               <span className="text-slate-900">2026</span> Price Benchmarks
             </div>
           </div>
+        </div>
       </section>
 
       {/* 2. SERVICES GRID */}
