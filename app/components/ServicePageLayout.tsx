@@ -71,8 +71,8 @@ export default function ServicePageLayout({ category }: ServicePageLayoutProps) 
             </section>
 
             {/* CALCULATOR SECTION */}
-            <section className="py-24 relative">
-                <div className="absolute inset-0 bg-slate-900 pointer-events-none -skew-y-3 origin-top-right translate-y-24"></div>
+            <section className="pt-48 pb-24 relative overflow-hidden">
+                <div className="absolute inset-0 bg-slate-900 pointer-events-none -skew-y-3 origin-top-right"></div>
                 <div className="max-w-7xl mx-auto px-4 relative z-10">
                     <div className="text-center mb-16 space-y-4">
                         <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">Market Estimator</h2>
