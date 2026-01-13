@@ -1,21 +1,38 @@
 "use client";
 
-import { useState } from "react";
-import { Calculator as CalculatorIcon, Info, RefreshCw, ThermometerSun } from "lucide-react";
+import { useState, useMemo } from "react";
+import { Calculator as CalculatorIcon, Info, Users, MapPin, ChevronDown } from "lucide-react";
+import { SERVICES } from "../data/services";
 
-import { CALCULATOR_RATES } from "../data/services";
+type UnitType = "wall" | "cassette" | "standing";
 
-type UnitType = "wall" | "ceiling";
-type Horsepower = "1.0" | "1.5" | "2.0" | "2.5" | "3.0";
-type ServiceType = "normal" | "chemical" | "overhaul";
+const UNIT_TYPE_MULTIPLIERS = {
+    wall: 1.0,
+    cassette: 1.3,
+    standing: 1.4,
+};
 
 export default function Calculator() {
+    const [serviceId, setServiceId] = useState<string>("normal");
+    const [units, setUnits] = useState<number>(1);
     const [unitType, setUnitType] = useState<UnitType>("wall");
-    const [hp, setHp] = useState<Horsepower>("1.0");
-    const [serviceType, setServiceType] = useState<ServiceType>("normal");
 
+    const calculation = useMemo(() => {
+        const service = SERVICES.find((s) => s.id === serviceId);
+        if (!service) return { min: 0, max: 0 };
 
-    const priceRange = CALCULATOR_RATES[unitType][hp][serviceType];
+        const multiplier = UNIT_TYPE_MULTIPLIERS[unitType];
+
+        // Calculate raw prices
+        let min = service.minPrice * multiplier * units;
+        let max = service.maxPrice * multiplier * units;
+
+        // Round to nearest 10 for "no precision" look
+        min = Math.ceil(min / 10) * 10;
+        max = Math.ceil(max / 10) * 10;
+
+        return { min, max };
+    }, [serviceId, units, unitType]);
 
     return (
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100 max-w-md mx-auto transform transition-all hover:scale-[1.01] duration-300">
@@ -23,70 +40,83 @@ export default function Calculator() {
                 <div className="bg-blue-100 p-3 rounded-full">
                     <CalculatorIcon className="w-6 h-6 text-blue-600" />
                 </div>
-                <h2 className="text-xl font-bold text-gray-800">Estimate Cost</h2>
+                <div>
+                    <h2 className="text-xl font-bold text-gray-800">Check Market Prices</h2>
+                    <p className="text-xs text-gray-500">For standard residential units</p>
+                </div>
             </div>
 
-            <div className="space-y-5">
-                {/* Unit Type */}
+            <div className="space-y-6">
+                {/* Service Type Dropdown */}
                 <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-2">Aircon Type</label>
-                    <div className="grid grid-cols-2 gap-3">
-                        <button
-                            onClick={() => setUnitType("wall")}
-                            className={`p-3 rounded-lg border text-sm font-medium transition-colors ${unitType === "wall"
-                                ? "bg-blue-50 border-blue-500 text-blue-700"
-                                : "border-gray-200 text-gray-600 hover:border-gray-300"
-                                }`}
+                    <label className="block text-sm font-medium text-gray-600 mb-2">Service Needed</label>
+                    <div className="relative">
+                        <select
+                            value={serviceId}
+                            onChange={(e) => setServiceId(e.target.value)}
+                            className="w-full p-3 pr-10 appearance-none rounded-lg border border-gray-200 bg-gray-50 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium"
                         >
-                            Wall Mounted
-                        </button>
-                        <button
-                            onClick={() => setUnitType("ceiling")}
-                            className={`p-3 rounded-lg border text-sm font-medium transition-colors ${unitType === "ceiling"
-                                ? "bg-blue-50 border-blue-500 text-blue-700"
-                                : "border-gray-200 text-gray-600 hover:border-gray-300"
-                                }`}
-                        >
-                            Ceiling / Cassette
-                        </button>
+                            {SERVICES.map((s) => (
+                                <option key={s.id} value={s.id}>
+                                    {s.name}
+                                </option>
+                            ))}
+                        </select>
+                        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
                     </div>
                 </div>
 
-                {/* Horsepower */}
-                <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-2">Horsepower (HP)</label>
-                    <select
-                        value={hp}
-                        onChange={(e) => setHp(e.target.value as Horsepower)}
-                        className="w-full p-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-                    >
-                        <option value="1.0">1.0 HP</option>
-                        <option value="1.5">1.5 HP</option>
-                        <option value="2.0">2.0 HP</option>
-                        <option value="2.5">2.5 HP</option>
-                        <option value="3.0">3.0 HP</option>
-                    </select>
+                <div className="grid grid-cols-2 gap-4">
+                    {/* Number of Units */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-600 mb-2">Quantity (Units)</label>
+                        <div className="flex items-center rounded-lg border border-gray-200 overflow-hidden">
+                            <button
+                                onClick={() => setUnits(Math.max(1, units - 1))}
+                                className="px-3 py-2 bg-gray-50 hover:bg-gray-100 text-gray-600 border-r border-gray-200"
+                            >
+                                -
+                            </button>
+                            <div className="flex-1 text-center font-bold text-gray-800 bg-white py-2">
+                                {units}
+                            </div>
+                            <button
+                                onClick={() => setUnits(Math.min(10, units + 1))}
+                                className="px-3 py-2 bg-gray-50 hover:bg-gray-100 text-gray-600 border-l border-gray-200"
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Area Placeholder */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-600 mb-2">Area / Location</label>
+                        <div className="flex items-center gap-2 p-3 bg-gray-100/50 border border-gray-200 rounded-lg text-gray-500 cursor-not-allowed">
+                            <MapPin className="w-4 h-4" />
+                            <span className="text-sm font-medium truncate">Klang Valley</span>
+                        </div>
+                    </div>
                 </div>
 
-                {/* Service Type */}
+                {/* Unit Type Selection */}
                 <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-2">Service Type</label>
-                    <div className="grid grid-cols-1 gap-2">
+                    <label className="block text-sm font-medium text-gray-600 mb-2">Unit Type</label>
+                    <div className="grid grid-cols-3 gap-2">
                         {[
-                            { id: "normal", label: "Normal Service (General Cleaning)", icon: ThermometerSun },
-                            { id: "chemical", label: "Chemical Wash (Deep Cleaning)", icon: RefreshCw },
-                            { id: "overhaul", label: "Overhaul (Dismantle & Clean)", icon: Info },
-                        ].map((st) => (
+                            { id: "wall", label: "Wall" },
+                            { id: "cassette", label: "Cassette" },
+                            { id: "standing", label: "Standing" }
+                        ].map((type) => (
                             <button
-                                key={st.id}
-                                onClick={() => setServiceType(st.id as ServiceType)}
-                                className={`flex items-center p-3 rounded-lg border text-left transition-all ${serviceType === st.id
-                                    ? "bg-blue-600 text-white border-blue-600 shadow-md"
-                                    : "bg-white border-gray-200 text-gray-700 hover:bg-gray-50"
+                                key={type.id}
+                                onClick={() => setUnitType(type.id as UnitType)}
+                                className={`p-2 rounded-lg border text-sm font-medium transition-colors ${unitType === type.id
+                                        ? "bg-blue-50 border-blue-500 text-blue-700"
+                                        : "border-gray-200 text-gray-600 hover:border-gray-300"
                                     }`}
                             >
-                                <st.icon className={`w-5 h-5 mr-3 ${serviceType === st.id ? "text-blue-100" : "text-gray-400"}`} />
-                                <span className="font-medium text-sm">{st.label}</span>
+                                {type.label}
                             </button>
                         ))}
                     </div>
@@ -94,13 +124,13 @@ export default function Calculator() {
 
                 {/* Result */}
                 <div className="mt-8 pt-6 border-t border-gray-100 text-center">
-                    <p className="text-sm text-gray-400 mb-1 font-medium">Estimated Market Rate</p>
-                    <div className="text-4xl font-black text-gray-800 tracking-tight">
-                        RM {priceRange[0]} - RM {priceRange[1]}
+                    <p className="text-sm text-gray-400 mb-1 font-medium">Estimated Price Range</p>
+                    <div className="text-3xl sm:text-4xl font-black text-gray-800 tracking-tight">
+                        RM {calculation.min} – RM {calculation.max}
                     </div>
-                    <p className="text-xs text-gray-400 mt-2 flex items-center justify-center gap-1">
-                        <Info className="w-3 h-3" />
-                        Based on average Klang Valley rates
+                    <p className="text-xs text-gray-400 mt-3 px-4 leading-relaxed">
+                        *Indicative only. Prices typically quoted by technicians in Klang Valley for {units} {unitType} unit(s).
+                        Not an official quote.
                     </p>
                 </div>
             </div>
