@@ -8,7 +8,7 @@ export const SERVICES: ServiceCategory[] = [
         description: "Professional cleaning, gas refills, and overhaul services for residential and commercial units.",
         icon: "Wind",
         color: "blue",
-        heroImage: "/technician-hero.png",
+        heroImage: "/images/heroes/aircon.png",
         thumbnailImage: "/images/thumbnails/aircon.png",
         items: [
             {
@@ -93,7 +93,7 @@ export const SERVICES: ServiceCategory[] = [
         description: "Reliable plumbing repairs, leak detection, and fixture installations for homes and offices.",
         icon: "Droplets",
         color: "emerald",
-        heroImage: "/plumbing-hero.png",
+        heroImage: "/images/heroes/plumbing.png",
         thumbnailImage: "/images/thumbnails/plumbing.png",
         items: [
             {
@@ -173,7 +173,7 @@ export const SERVICES: ServiceCategory[] = [
         description: "Safe and professional electrical wiring, troubleshooting, and socket installations for residential and commercial properties.",
         icon: "Zap",
         color: "amber",
-        heroImage: "/electrical-hero.png",
+        heroImage: "/images/heroes/electrical.png",
         thumbnailImage: "/images/thumbnails/electrical.png",
         items: [
             {
