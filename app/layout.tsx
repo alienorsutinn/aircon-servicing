@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Aircon Service Cost Checker – Klang Valley | KL & Selangor Rates",
-  description: "Check current market rates for aircon servicing in Kuala Lumpur & Selangor. Simple calculator to avoid overpaying for chemical wash and gas top-up.",
+  title: "Service Cost Checker Malaysia – Check Typical Prices Before You Book",
+  description: "Check typical costs for home services in Malaysia. Focused price ranges for aircon, plumbing, and electrical services in Klang Valley.",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${outfit.variable} font-sans antialiased`}
       >
         {children}
       </body>
