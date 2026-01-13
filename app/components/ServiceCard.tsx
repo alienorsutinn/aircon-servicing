@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Wind, Droplets, Zap } from "lucide-react";
 import { ServiceCategory } from "../types";
 
@@ -27,25 +28,38 @@ export default function ServiceCard({ category }: ServiceCardProps) {
     return (
         <Link
             href={category.slug}
-            className={`group block p-8 rounded-[2rem] border border-slate-200 bg-white transition-all duration-500 hover:-translate-y-2 shadow-sm ${colorClasses[category.color]?.split(' ').slice(0, 2).join(' ')}`}
+            className={`group block overflow-hidden rounded-4xl border border-slate-200 bg-white transition-all duration-500 hover:-translate-y-2 shadow-sm ${colorClasses[category.color]?.split(' ').slice(0, 2).join(' ')}`}
         >
-            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 duration-500 ${colorClasses[category.color]?.split(' ').slice(2).join(' ')}`}>
-                <Icon className="w-8 h-8" />
+            <div className="relative h-48 w-full overflow-hidden">
+                {category.thumbnailImage && (
+                    <Image 
+                        src={category.thumbnailImage} 
+                        alt={category.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                )}
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+                <div className={`absolute bottom-4 left-6 w-12 h-12 rounded-xl flex items-center justify-center backdrop-blur-md bg-white/20 border border-white/30 text-white`}>
+                    <Icon className="w-6 h-6" />
+                </div>
             </div>
 
-            <h3 className="text-2xl font-black text-slate-900 mb-1 tracking-tight group-hover:text-slate-800 transition-colors">
-                {category.title}
-            </h3>
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">
-                Klang Valley Rates
-            </div>
+            <div className="p-8">
+                <h3 className="text-2xl font-black text-slate-900 mb-1 tracking-tight group-hover:text-slate-800 transition-colors">
+                    {category.title}
+                </h3>
+                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">
+                    Klang Valley Rates
+                </div>
 
-            <p className="text-slate-500 font-medium leading-relaxed mb-8">
-                {category.description}
-            </p>
+                <p className="text-slate-500 font-medium leading-relaxed mb-8">
+                    {category.description}
+                </p>
 
-            <div className={`inline-flex items-center gap-2 font-black uppercase tracking-widest text-xs ${colorClasses[category.color]?.split(' ').slice(3).join(' ')}`}>
-                Check Costs <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                <div className={`inline-flex items-center gap-2 font-black uppercase tracking-widest text-xs ${colorClasses[category.color]?.split(' ').slice(3).join(' ')}`}>
+                    Check Costs <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                </div>
             </div>
         </Link>
     );

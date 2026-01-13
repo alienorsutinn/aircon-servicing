@@ -22,6 +22,7 @@ export interface ServiceCategory {
     icon: string;
     color: string;
     heroImage: string;
+    thumbnailImage?: string;
     items: ServiceItem[];
     calculatorRates?: {
         [type: string]: {

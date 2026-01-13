@@ -115,50 +115,61 @@ export default function ServicePageLayout({ category }: ServicePageLayoutProps) 
                 </div>
             </section>
 
-            {/* WHY PRICES VARY SECTION */}
-            {category.whyPricesVary && (
-                <section className="py-24 bg-slate-900 overflow-hidden text-left">
-                    <div className="max-w-7xl mx-auto px-4">
-                        <div className="max-w-2xl mb-16">
-                            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-6">
-                                {category.whyPricesVary.title}
-                            </h2>
-                            <p className="text-slate-400 font-medium">Several factors can push a quote toward the higher or lower end of the range.</p>
-                        </div>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {category.whyPricesVary.items.map((item, i) => {
-                                const Icon = icons[item.icon] || Info;
-                                return (
-                                    <div key={i} className="space-y-4 group">
-                                        <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-primary transition-all duration-300">
-                                            <Icon className="w-6 h-6" />
-                                        </div>
-                                        <h4 className="text-white font-bold text-lg">{item.title}</h4>
-                                        <p className="text-slate-400 text-sm leading-relaxed">{item.body}</p>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                </section>
-            )}
+            {/* PRICING INTELLIGENCE */}
+            <section className="py-24 bg-white border-b border-slate-100">
+                <div className="max-w-7xl mx-auto px-4 md:px-8">
+                    <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-start">
+                        {/* Factors Column */}
+                        <div className="lg:col-span-7 space-y-12">
+                            <div>
+                                <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-4">
+                                    Pricing Intelligence.
+                                </h2>
+                                <p className="text-slate-500 font-medium">Why quotes vary for {category.title.toLowerCase()} in Klang Valley.</p>
+                            </div>
 
-            {/* AVOID OVERCHARGING SECTION */}
-            {category.avoidOvercharging && (
-                <section className="py-32 bg-white text-center border-b border-slate-100">
-                    <div className="max-w-4xl mx-auto px-4 space-y-12">
-                        <div className="w-20 h-20 rounded-3xl bg-primary/5 flex items-center justify-center mx-auto">
-                            <ShieldCheck className="w-10 h-10 text-primary" />
+                            <div className="grid sm:grid-cols-2 gap-8">
+                                {category.whyPricesVary?.items.map((item, i) => {
+                                    const Icon = icons[item.icon] || Info;
+                                    return (
+                                        <div key={i} className="space-y-3 p-6 rounded-3xl bg-slate-50 border border-slate-100 transition-colors hover:border-slate-200">
+                                            <div className={`w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary`}>
+                                                <Icon className="w-5 h-5" />
+                                            </div>
+                                            <h4 className="text-slate-900 font-bold">{item.title}</h4>
+                                            <p className="text-slate-500 text-xs leading-relaxed">{item.body}</p>
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
-                        <div className="space-y-6">
-                            <h2 className="text-3xl md:text-6xl font-black text-slate-900 tracking-tight">{category.avoidOvercharging.title}</h2>
-                            <p className="text-xl text-slate-600 leading-relaxed font-medium">
-                                {category.avoidOvercharging.body}
-                            </p>
+
+                        {/* Expert Advice Column */}
+                        <div className="lg:col-span-5 mt-16 lg:mt-0">
+                            <div className="bg-slate-900 rounded-[3rem] p-10 text-white space-y-8 relative overflow-hidden shadow-2xl">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl rounded-full" />
+                                <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center relative z-10">
+                                    <ShieldCheck className="w-8 h-8 text-primary" />
+                                </div>
+                                <div className="space-y-4 relative z-10">
+                                    <h3 className="text-2xl font-black tracking-tight">{category.avoidOvercharging?.title}</h3>
+                                    <p className="text-slate-400 text-sm leading-relaxed font-medium">
+                                        {category.avoidOvercharging?.body}
+                                    </p>
+                                </div>
+                                <div className="pt-6 border-t border-white/10 relative z-10">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-10 h-10 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-[10px] font-black italic">SV</div>
+                                        <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                                            Vetted Malaysia <br /> Price Benchmarks
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </section>
-            )}
+                </div>
+            </section>
 
             {/* REVIEWS SECTION */}
             <section className="py-32 bg-slate-50">

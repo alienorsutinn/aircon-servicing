@@ -5,8 +5,15 @@ import ServiceCard from "./components/ServiceCard";
 import TechnicianWaitlistModal from "./components/TechnicianWaitlistModal";
 import ReferralModal from "./components/ReferralModal";
 import GlobalDisclaimer from "./components/GlobalDisclaimer";
-import { ShieldCheck, MapPin, Search, Activity } from "lucide-react";
+import { ArrowRight, Wind, Droplets, Zap, LucideIcon } from "lucide-react";
 import { SERVICES } from "./data/services";
+import { ServiceCategory } from "../types";
+
+const icons: { [key: string]: LucideIcon } = {
+    Wind,
+    Droplets,
+    Zap,
+};
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,18 +23,24 @@ export default function Home() {
     <div className="min-h-screen bg-white text-slate-800 selection:bg-primary/10">
       {/* 1. HERO SECTION */}
       <section className="pt-32 pb-24 px-4 border-b border-slate-100">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 border border-slate-200 text-slate-500 text-xs font-bold uppercase tracking-widest">
-            <MapPin className="w-4 h-4" /> Klang Valley Focus
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-[10px] font-black uppercase tracking-widest shadow-sm">
+            <ShieldCheck className="w-4 h-4" /> 100% Independent Market Data
           </div>
           <h1 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 leading-[1.1]">
-            Check Typical Home Service <br className="hidden md:block" />
-            Costs in Malaysia
+            Klang Valley Home <br className="hidden md:block" />
+            Service Cost Guide
           </h1>
-          <p className="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed">
-            Avoid overcharging. See realistic price ranges for common home repairs and maintenance before you book a technician.
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
+            Don&apos;t guess the price. See realistic price ranges for home repairs verified by local pros.
           </p>
-        </div>
+          <div className="flex flex-wrap justify-center gap-6 pt-4">
+            <div className="flex items-center gap-2 text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+              <span className="text-slate-900">12+</span> Vendors Audited
+            </div>
+            <div className="flex items-center gap-2 text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+              <span className="text-slate-900">2026</span> Price Benchmarks
+            </div>
+          </div>
       </section>
 
       {/* 2. SERVICES GRID */}
