@@ -1,141 +1,149 @@
 import Calculator from "./components/Calculator";
 import PricingTable from "./components/PricingTable";
-import { CheckCircle2, ShieldCheck, MapPin, AlertCircle } from "lucide-react";
+import { CheckCircle2, ShieldCheck, AlertCircle, Wrench, Zap, Ruler, MapPin, Search } from "lucide-react";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 font-sans selection:bg-blue-100">
-      {/* Navigation */}
-      <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2">
-              <div className="bg-blue-600 rounded-lg p-1.5">
-                <span className="text-white font-bold text-lg leading-none">KL</span>
-              </div>
-              <span className="text-lg font-bold text-slate-800 tracking-tight">AirconRates</span>
-            </div>
-            <div className="text-sm font-medium text-slate-500 hidden sm:block">
-              Updated for 2026
-            </div>
+      {/* 1. HERO */}
+      <section className="pt-20 pb-16 px-4 text-center bg-white border-b border-gray-100">
+        <div className="max-w-4xl mx-auto space-y-6">
+          <div className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+            <MapPin className="w-4 h-4" /> KL & Selangor
           </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-white to-blue-50/50">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row gap-12 items-start md:items-center">
-
-            {/* Hero Text */}
-            <div className="flex-1 space-y-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100/50 text-blue-700 text-sm font-semibold border border-blue-200">
-                <MapPin className="w-3.5 h-3.5" />
-                Klang Valley & Selangor
-              </div>
-
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">
-                Stop Overpaying for <br className="hidden md:block" />
-                <span className="text-blue-600">Aircon Servicing</span>
-              </h1>
-
-              <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-lg">
-                Instantly check fair market rates for chemical wash, gas top-up, and normal servicing. Don't get quoted high prices again.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                <div className="flex items-center gap-2 text-sm font-medium text-slate-600 bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-100">
-                  <CheckCircle2 className="w-4 h-4 text-green-500" />
-                  <span>Verified Market Data</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm font-medium text-slate-600 bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-100">
-                  <CheckCircle2 className="w-4 h-4 text-green-500" />
-                  <span>Unbiased Estimates</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Component */}
-            <div className="w-full md:w-[420px] relative z-10 mx-auto">
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 blur-2xl opacity-10 rounded-3xl"></div>
-              <Calculator />
-            </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+            Aircon Service Cost Checker <br className="hidden sm:block" />
+            <span className="text-blue-600">– Klang Valley</span>
+          </h1>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            Check typical aircon service prices in Malaysia before you book.
+          </p>
+          <div className="flex items-center justify-center gap-2 text-sm font-semibold text-green-600">
+            <CheckCircle2 className="w-5 h-5" />
+            Based on real quotes from local technicians
           </div>
         </div>
       </section>
 
-      {/* Trust & Info Section */}
-      <section className="py-20 bg-white border-t border-gray-100">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-black text-slate-900 mb-4">Typical Aircon Service Rates</h2>
-            <p className="text-lg text-slate-600">
-              We aggregated 2025/2026 pricing from 50+ service providers in Klang Valley.
-              These are estimates for standard residential units.
+      {/* 2. COST CHECKER (Calculator) */}
+      <section className="py-12 px-4 -mt-8">
+        <div className="max-w-md mx-auto relative z-10">
+          <Calculator />
+        </div>
+      </section>
+
+      {/* 3. TYPICAL PRICE TABLE */}
+      <section className="py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-900">Typical Price Ranges (2025/2026)</h2>
+            <p className="text-slate-500 mt-2">Standard market rates for standard units.</p>
+          </div>
+          <PricingTable />
+        </div>
+      </section>
+
+      {/* 4. WHY PRICES VARY */}
+      <section className="py-20 bg-slate-50 border-y border-gray-200">
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-slate-900 text-center mb-12">Why do quotes vary?</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <FeatureItem
+              icon={<Zap className="w-6 h-6 text-yellow-500" />}
+              title="Horsepower (HP)"
+              desc="Larger units (2.0HP+) take longer to clean and use more gas."
+            />
+            <FeatureItem
+              icon={<Search className="w-6 h-6 text-blue-500" />}
+              title="Dirt Level"
+              desc="Extremely dirty units may need a chemical overhaul vs normal chemical wash."
+            />
+            <FeatureItem
+              icon={<ShieldCheck className="w-6 h-6 text-green-500" />}
+              title="Brand & Parts"
+              desc="Inverter models or specific brands (Daikin/Panasonic) may use different gas."
+            />
+            <FeatureItem
+              icon={<Ruler className="w-6 h-6 text-purple-500" />}
+              title="Accessibility"
+              desc="High ceilings (>10ft) or difficult outdoor unit access adds labour cost."
+            />
+            <FeatureItem
+              icon={<Wrench className="w-6 h-6 text-slate-500" />}
+              title="Service Depth"
+              desc="Dismantling unit for deep cleaning costs more than surface cleaning."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 5. AVOID OVERCHARGING */}
+      <section className="py-20 bg-white">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-slate-900 mb-6">Avoid being overcharged</h2>
+          <div className="prose prose-lg mx-auto text-slate-600 leading-relaxed">
+            <p>
+              The best defense against unfair pricing is <strong>information</strong>.
+              Technicians sometimes markup basic services or add "mandatory" gas refills when they aren't needed.
+            </p>
+            <p className="mt-4">
+              Use this tool to get a baseline. If a quote is significantly higher without a clear reason (like major repairs), get a second opinion.
             </p>
           </div>
-
-          <div className="mb-16">
-            <PricingTable />
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-16">
-            <div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-6">Why prices vary</h3>
-              <p className="text-slate-600 mb-6 leading-relaxed">
-                Technicians often quote a base price, but the final cost depends on the condition of your unit and logistics.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  "Gas Type: R22 (older) is becoming rarer and more expensive than R32/R410A.",
-                  "Accessibility: High ceilings (>10ft) may require scaffolding (+RM50-100).",
-                  "Location: Technician transport fees apply if outside their coverage area."
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-slate-700">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-6">Service Types Explained</h3>
-              <div className="space-y-5">
-                <div className="p-4 rounded-xl bg-gray-50 border border-gray-100">
-                  <h4 className="font-bold text-slate-800 mb-1 flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-blue-600" /> Normal Service
-                  </h4>
-                  <p className="text-sm text-slate-600">Basic cleaning of filters and cover. Recommended every 3-4 months.</p>
-                </div>
-                <div className="p-4 rounded-xl bg-blue-50/50 border border-blue-100">
-                  <h4 className="font-bold text-blue-900 mb-1 flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-blue-600" /> Chemical Wash
-                  </h4>
-                  <p className="text-sm text-blue-800/80">Deep cleaning with chemicals to remove mold/jelly. Recommended once a year.</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Disclaimer / Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
-          <div className="flex items-center justify-center gap-2 mb-6 text-yellow-500/90 font-medium">
-            <AlertCircle className="w-4 h-4" />
-            <span className="text-yellow-100">Disclaimer</span>
-          </div>
-          <p className="max-w-2xl mx-auto mb-8 leading-relaxed opacity-80">
-            The prices shown on this website are estimates based on market research in the Klang Valley area as of 2025/2026.
-            Actual costs may vary depending on the specific condition of your unit, location logistics, and the service provider you choose.
-            We are not a service provider and do not guarantee these rates.
+      {/* 6. CTA: CONNECT */}
+      <section className="py-24 bg-blue-900 text-white text-center px-4">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold mb-8">Need a reliable technician?</h2>
+          <button className="bg-white text-blue-900 font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-gray-50 transition-transform hover:scale-105 active:scale-95 disabled:opacity-75 disabled:cursor-not-allowed">
+            Connect with a recommended technician
+          </button>
+          <p className="mt-6 text-blue-200 text-sm font-medium">
+            We’re opening recommendations soon. Stay tuned.
           </p>
-          <div className="text-slate-600">
-            © {new Date().getFullYear()} AirconRates. All rights reserved.
+        </div>
+      </section>
+
+      {/* 7. DISCLAIMER */}
+      <section className="py-12 bg-slate-950 text-slate-500 text-xs border-t border-slate-900">
+        <div className="max-w-4xl mx-auto px-4 space-y-4 text-center">
+          <div className="flex justify-center mb-4">
+            <AlertCircle className="w-6 h-6 text-slate-700" />
           </div>
+          <p>
+            <strong>Disclaimer:</strong> The Aircon Service Cost Checker is an informational tool only.
+            The prices shown are estimates based on collected market data in Klang Valley.
+            Actual service costs will vary depending on the specific service provider, the condition of your unit, current market rates, and other factors.
+          </p>
+          <p>
+            We do not guarantee the accuracy of these prices and are not responsible for any disputes between you and service providers.
+            Always ask for a final quotation before agreeing to any work.
+          </p>
+        </div>
+      </section>
+
+      {/* 8. FOOTER */}
+      <footer className="bg-slate-950 pb-12 pt-4">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <p className="text-slate-600 text-sm">
+            © {new Date().getFullYear()} Aircon Service Cost Checker (Malaysia).
+          </p>
         </div>
       </footer>
     </div>
   );
+}
+
+function FeatureItem({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) {
+  return (
+    <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm text-left">
+      <div className="mb-4 bg-gray-50 w-12 h-12 rounded-lg flex items-center justify-center">
+        {icon}
+      </div>
+      <h3 className="font-bold text-slate-900 mb-2">{title}</h3>
+      <p className="text-sm text-slate-600 leading-relaxed">{desc}</p>
+    </div>
+  )
 }
